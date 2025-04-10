@@ -15,6 +15,8 @@ The solution I came up with was to decompose a string into a LIST of their ASCII
 
 From a documentation point of view, the original credential string value can be stored as a comment ajacent to the LIST value since comments are dropped during Python compilation.
 
+Note that this solution cannot be applied to uPython. The bytecode produced from compiling shows the ASCII of the binary when the .MPY is examined with HEXDUMP -C
+
 ## Sample Program With Character String Credentials
 
 This is a simple email program. It works; I tested it before changing the credentials
@@ -202,4 +204,6 @@ There is a tool called [uncompyle6](https://pypi.org/project/uncompyle6/) that c
 
 The above applications were run under Python 3.9 which is now a dated version. When I ran 'uncompyle6' on the last PYC it returned the error `Unsupported Python version, 3.9.0, for decompilation`
 
+There is also a chance that performing a binary read of the bytecode and converting each byte to ASCII could expose the credential. See the [ here 
+](https://forums.raspberrypi.com/viewtopic.php?p=2309096#p2309090)
 Keeping an eye out for decompile tools is suggested.
